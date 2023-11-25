@@ -1,0 +1,37 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Date: Sat, 25 Nov 2023 20:44:17 +0000
+MD5Sum:
+ 0bf61a9f6c920b81989e33ebf7d8aa1e             2611 repo/Packages
+ 1ea62fd05cafb99bbf9f1a963311516e              878 repo/Packages.gz
+ f7902193ab0ecd7784daa3be03405c28               38 repo/Release
+SHA1:
+ ce9387c067cd4056bb0521740b1558acd3961248             2611 repo/Packages
+ 216ef008a772611d6fb51955cfeffced9c950778              878 repo/Packages.gz
+ 304032d4a0e8ab150ff1af2ef04f72c062bf1274               38 repo/Release
+SHA256:
+ 48c2a6932c0db39a4f91a3d3c9ca63b8f4eae984ee7b3415c71a21dc83b304cf             2611 repo/Packages
+ 7459f4a9e303c026ac104d42af7aa1891bbe6a4aab9dbb72040ccd0e4f5bbb4f              878 repo/Packages.gz
+ c0187a24eaccd20c2d6f3e01661c7015f48a36bbc4329186018c9e1c93affc35               38 repo/Release
+SHA512:
+ 3de94827da3a41e3e74ac643406d6bdaa683f38bb14cbf94bae704d242610b7f10c0c5d3fc89855d7a532c5ba78d1073e8ebcdd4d881928b1a20ffb5ee377d08             2611 repo/Packages
+ 2fcb3b1dba7b0732b9c74493952ffbbf6f943fd0e52dc2006da132ff84d882939d39fd7e383ee7293d50ba4bfc7e6b3508a738be6e0ae3716d75721d133d54bf              878 repo/Packages.gz
+ 554f27260aecc68574fe47b647eb253e19ea296798238e7990e561349ba173aa3c915c2bc1906abb8f9681f281d517b92d8753a3e73ebfb6ca7cb6cc3532fa7c               38 repo/Release
+-----BEGIN PGP SIGNATURE-----
+
+iQJXBAEBCgBBFiEEdHdTaeVBIzEC5B7olmfu/CCpedUFAmViXKEjHGR1ZGU1Njk4
+N0B1c2Vycy5ub3JlcGx5LmdpdGh1Yi5jb20ACgkQlmfu/CCpedVsuBAAn/k+tewj
+KO0Fvwn/4Gjk8qi1OnofTiqox2uQpZYx3rRKPKnlF5krIgjbikIsbasCQHiekSL4
+Q/zVnvgY1KTfx/GcdHWRSoSatpur7zNKZqZNdcBui62kLk4kuVaGA+DmVNjOG1zu
+Nvg9IKZdLqdB+D6EvA0phyQA9no3oH/mfpKdZkjYwsMo+JHoIty0WfGEI6kohNY+
+aqA/fF6l1BGN7e05zuM/9JOI0uAVc5grvOgjFHgA3FDIOpVTYBRwHH03OzLBTdVs
+S5ox2CD1gSdPOHV3wuIGvK+NQW4zfvWkXtlbLyWu/xjSkaeSZSPvuk9H20RY8Ym4
+VGj9x/r3KMYuNslJW/arO78uqFuRZNq55HXrKJ2IKsLT6dguTtkidP22at3sYQuz
+rAUHOUzUsWsRdEIHs+2dEQhhAFRmvUH/JQsxl/7uTvzGeR9QuQqYnRPzlbTlhSxS
+7aGgSUkDS1hrRgjPgyxXoH2VcPoFo05Sl/FrORlSQYwJclQThMUbJlfVGix3mx+S
+LsrUXqv4MAIwfb9OHYicrXaAfC/p8ZjWIzpkUH3UM+XW3nzAXi2gCLjCBL4SVBL1
+6wRPEnyoy0gA9v/jfSylPUViogbcst84FjkaANjWcsFEzBxX8EcOIVI75ddIPWK+
+FUdzAwfPZekcWwZPt3coDo16e90BdfPFa2w=
+=zh48
+-----END PGP SIGNATURE-----

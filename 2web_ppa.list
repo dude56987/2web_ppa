@@ -1,0 +1,1 @@
+deb [signed-by=/etc/apt/trusted.gpg.d/2web_ppa.gpg] https://dude56987.github.io/2web_ppa/repo ./
