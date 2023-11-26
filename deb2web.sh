@@ -48,22 +48,26 @@ function main(){
 		repoName="$3"
 		mkdir -p "./repo/"
 		gpgEmail="$githubUsername@users.noreply.github.com"
+
+		# export public key file to repo for users using the key to verify packages in the repo
+		gpg --armor --export "$gpgEmail" > ./repo/KEY.gpg
+
 		# generate the packages file
 		dpkg-scanpackages --multiversion . > ./repo/Packages
 		# compress the packages file
-		#gzip -k -f ./repo/Packages
 		gzip -k --best -f ./repo/Packages
 		# build the release files
 		apt-ftparchive release . > ./repo/Release
-
-		# export public key file if it does not yet exist
-		gpg --armor --export "$gpgEmail" > ./$repoName.gpg
 
 		# sign the packages in the repo
 		gpg --default-key "$gpgEmail" -abs -o - ./repo/Release > ./repo/Release.gpg
 		gpg --default-key "$gpgEmail" --clearsign -o - ./repo/Release > ./repo/InRelease
 
 		# sign all the packages with gpg
+		find "./repo/" -name '*.deb' | while read packageName;do
+			dpkg-sig --sign builder "$packageName"
+		done
+
 		echo "You must update the repo with git commit and git push in order to see"
 		echo "changes on the repo online"
 		# generate the .list file for the repo
@@ -78,9 +82,9 @@ function main(){
 			echo ""
 			echo ""
 			# download and store the public key as a trusted key
-			echo "	sudo curl -s --compressed -o '/etc/apt/trusted.gpg.d/$repoName.gpg' 'https://$githubUsername.github.io/$repoName/$repoName.gpg'"
+			echo "	sudo curl -SsL --compressed -o '/etc/apt/trusted.gpg.d/$repoName.gpg' 'https://$githubUsername.github.io/$repoName/repo/KEY.gpg'"
 			# download and store the list file
-			echo "	sudo curl -s --compressed -o /etc/apt/sources.list.d/$repoName.list 'https://$githubUsername.github.io/$repoName/$repoName.list'"
+			echo "	sudo curl -SsL --compressed -o '/etc/apt/sources.list.d/$repoName.list' 'https://$githubUsername.github.io/$repoName/$repoName.list'"
 			echo "	sudo apt update"
 			echo ""
 			echo ""
@@ -88,7 +92,7 @@ function main(){
 			echo ""
 			echo ""
 			# wget variant of above commands
-			echo "	sudo wget -q -O  '/etc/apt/trusted.gpg.d/$repoName.gpg' 'https://$githubUsername.github.io/$repoName/$repoName.gpg'"
+			echo "	sudo wget -q -O '/etc/apt/trusted.gpg.d/$repoName.gpg' 'https://$githubUsername.github.io/$repoName/repo/KEY.gpg'"
 			echo "	sudo wget -q -O '/etc/apt/sources.list.d/$repoName.list' 'https://$githubUsername.github.io/$repoName/$repoName.list'"
 			echo "	sudo apt update"
 			echo ""
@@ -106,9 +110,6 @@ function main(){
 			echo "- [GPLv3](./LICENSE)"
 			echo ""
 		} > "README.md"
-		# convert readme to a index for repo
-		markdown README.md > "./index.html"
-		markdown README.md > "./repo/index.html"
 	elif [ "$1" == "-c" ] || [ "$1" == "--create-key" ] || [ "$1" == "create-key" ];then
 		################################################################################
 		# Create a gpg key to be used here
@@ -136,8 +137,6 @@ function main(){
 		echo "  with a graphical interface."
 		echo "################################################################################"
 		gpg --full-gen-key
-		# export public key file to repo for users using the key to verify packages in the repo
-		gpg --armor --export "$gpgEmail" > ./$repoName.gpg
 	elif [ "$1" == "-h" ] || [ "$1" == "--help" ] || [ "$1" == "help" ];then
 		echo "################################################################################"
 		echo "HELP"

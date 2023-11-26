@@ -5,10 +5,10 @@ Maintainer: Carl J Smith
 Installed-Size: 3164
 Depends: apache2(>=2.4), detox, html-xml-utils, wkhtmltopdf, txt2html, ffmpeg, imagemagick, mediainfo, php, libapache2-mod-php, php-curl, php-zip, php-sqlite3, python3-pip, pylint, fonts-opendyslexic, parallel, at, ncurses-bin, coreutils, jq, curl, cron, findutils, procps, openssl, poppler-utils, weather-util, weather-util-data, fortune, fortunes, symlinks, sqlite3, qrencode, vnstati, pandoc, gource, git, gitinspector, weblint, shellcheck, librsvg2-bin, xvfb, dict, dictd, php-pspell, aspell-en, wget, bc
 Filename: ./source/2web/2web_UNSTABLE.deb
-Size: 424240
-MD5sum: 98eb38da15d703f1d47ef3d60f93940f
-SHA1: 4a8fc9c9b492db5dbb8d60c2c458bf28f62ba930
-SHA256: 68898432e20e720721b9a2d5b7f6e3d5adb0f73d798aaed432b00051c18b79f6
+Size: 424216
+MD5sum: ed38bb5f80cf8595d884fdddc4a4de59
+SHA1: 614ce2abf28320781306367d71e27fe067975edf
+SHA256: 5550ba7e5b54ad91cad2cf35bb18c345ebc7e3b866666c8a547f255a7ce9093f
 Section: admin
 Priority: optional
 Description: Generate a website for use on the LAN
@@ -21,10 +21,10 @@ Maintainer: Carl J Smith
 Installed-Size: 3164
 Depends: apache2(>=2.4), detox, html-xml-utils, wkhtmltopdf, txt2html, ffmpeg, imagemagick, mediainfo, php, libapache2-mod-php, php-curl, php-zip, php-sqlite3, python3-pip, pylint, fonts-opendyslexic, parallel, at, ncurses-bin, coreutils, jq, curl, cron, findutils, procps, openssl, poppler-utils, weather-util, weather-util-data, fortune, fortunes, symlinks, sqlite3, qrencode, vnstati, pandoc, gource, git, gitinspector, weblint, shellcheck, librsvg2-bin, xvfb, dict, dictd, php-pspell, aspell-en, wget, bc
 Filename: ./repo/2web_v1.0.0.574.deb
-Size: 424240
-MD5sum: 98eb38da15d703f1d47ef3d60f93940f
-SHA1: 4a8fc9c9b492db5dbb8d60c2c458bf28f62ba930
-SHA256: 68898432e20e720721b9a2d5b7f6e3d5adb0f73d798aaed432b00051c18b79f6
+Size: 424216
+MD5sum: ed38bb5f80cf8595d884fdddc4a4de59
+SHA1: 614ce2abf28320781306367d71e27fe067975edf
+SHA256: 5550ba7e5b54ad91cad2cf35bb18c345ebc7e3b866666c8a547f255a7ce9093f
 Section: admin
 Priority: optional
 Description: Generate a website for use on the LAN

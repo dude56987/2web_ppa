@@ -33,17 +33,15 @@ keys:
 	bash deb2web.sh --create-key "dude56987"
 install:
 	# install the repo on to the current operating system
-	cp -v 2web_ppa.list /etc/apt/trusted.gpg.d/2web_ppa.list
-	cp -v 2web_ppa.gpg /etc/apt/trusted.gpg.d/2web_ppa.gpg
+	sudo cp -v 2web_ppa.list /etc/apt/sources.list.d/2web_ppa.list
+	sudo cp -v ./repo/KEY.gpg /etc/apt/trusted.gpg.d/2web_ppa.gpg
 uninstall:
 	# remove this repo from the system
-	rm -v /etc/apt/trusted.gpg.d/2web_ppa.list
-	rm -v /etc/apt/trusted.gpg.d/2web_ppa.gpg
+	sudo rm -v /etc/apt/sources.list.d/2web_ppa.list
+	sudo rm -v /etc/apt/trusted.gpg.d/2web_ppa.gpg
 clean:
 	# remove the repo itself to be regenerated with make
 	sudo rm -rv ./repo/ || echo "No file to clean..."
 	# remove the source directory for building packages
 	sudo rm -rv ./source/ || echo "No file to clean..."
-	sudo rm -v ./2web_ppa.gpg || echo "No file to clean..."
 	sudo rm -v ./2web_ppa.list || echo "No file to clean..."
-	sudo rm -v ./index.html || echo "No file to clean..."
