@@ -30,11 +30,12 @@ build:
 	# build the package and copy it with correct name into top level of repo
 	bash deb2web.sh --build
 keys:
+	# build a key
 	bash deb2web.sh --create-key "dude56987"
 install:
 	# install the repo on to the current operating system
-	sudo cp -v 2web_ppa.list /etc/apt/sources.list.d/2web_ppa.list
-	sudo cp -v ./repo/KEY.gpg /etc/apt/trusted.gpg.d/2web_ppa.gpg
+	sudo cp -v ./2web_ppa.list /etc/apt/sources.list.d/2web_ppa.list
+	sudo cp -v ./2web_ppa.gpg /etc/apt/trusted.gpg.d/2web_ppa.gpg
 uninstall:
 	# remove this repo from the system
 	sudo rm -v /etc/apt/sources.list.d/2web_ppa.list

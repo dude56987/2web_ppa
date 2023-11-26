@@ -50,7 +50,9 @@ function main(){
 		gpgEmail="$githubUsername@users.noreply.github.com"
 
 		# export public key file to repo for users using the key to verify packages in the repo
-		gpg --armor --export "$gpgEmail" > ./repo/KEY.gpg
+		#gpg --armor --export "$gpgEmail" > ./repo/KEY.gpg
+		# export key without armor for usage
+		gpg --export "$gpgEmail" > ./$repoName.gpg
 
 		# generate the packages file
 		dpkg-scanpackages --multiversion . > ./repo/Packages
@@ -64,7 +66,7 @@ function main(){
 		gpg --default-key "$gpgEmail" --clearsign -o - ./repo/Release > ./repo/InRelease
 
 		# sign all the packages with gpg
-		find "./repo/" -name '*.deb' | while read packageName;do
+		find "./repo/" -name '*.deb' | uniq | while read packageName;do
 			dpkg-sig --sign builder "$packageName"
 		done
 
@@ -82,7 +84,7 @@ function main(){
 			echo ""
 			echo ""
 			# download and store the public key as a trusted key
-			echo "	sudo curl -SsL --compressed -o '/etc/apt/trusted.gpg.d/$repoName.gpg' 'https://$githubUsername.github.io/$repoName/repo/KEY.gpg'"
+			echo "	sudo curl -SsL --compressed -o '/etc/apt/trusted.gpg.d/$repoName.gpg' 'https://$githubUsername.github.io/$repoName/$repoName.gpg'"
 			# download and store the list file
 			echo "	sudo curl -SsL --compressed -o '/etc/apt/sources.list.d/$repoName.list' 'https://$githubUsername.github.io/$repoName/$repoName.list'"
 			echo "	sudo apt update"
@@ -92,7 +94,7 @@ function main(){
 			echo ""
 			echo ""
 			# wget variant of above commands
-			echo "	sudo wget -q -O '/etc/apt/trusted.gpg.d/$repoName.gpg' 'https://$githubUsername.github.io/$repoName/repo/KEY.gpg'"
+			echo "	sudo wget -q -O '/etc/apt/trusted.gpg.d/$repoName.gpg' 'https://$githubUsername.github.io/$repoName/$repoName.gpg'"
 			echo "	sudo wget -q -O '/etc/apt/sources.list.d/$repoName.list' 'https://$githubUsername.github.io/$repoName/$repoName.list'"
 			echo "	sudo apt update"
 			echo ""
