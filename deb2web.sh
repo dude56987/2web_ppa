@@ -54,21 +54,21 @@ function main(){
 		# export key without armor for usage
 		gpg --export "$gpgEmail" > ./$repoName.gpg
 
+		find "./repo/" -name '*.deb' | uniq | while read packageName;do
+			dpkg-sig --sign builder "$packageName"
+		done
+
 		# generate the packages file
-		dpkg-scanpackages --multiversion . > ./repo/Packages
+		dpkg-scanpackages --multiversion ./repo/ > ./repo/Packages
 		# compress the packages file
 		gzip -k --best -f ./repo/Packages
 		# build the release files
-		apt-ftparchive release . > ./repo/Release
+		apt-ftparchive release ./repo/ > ./repo/Release
 
 		# sign the packages in the repo
 		gpg --default-key "$gpgEmail" -abs -o - ./repo/Release > ./repo/Release.gpg
 		gpg --default-key "$gpgEmail" --clearsign -o - ./repo/Release > ./repo/InRelease
-
 		# sign all the packages with gpg
-		find "./repo/" -name '*.deb' | uniq | while read packageName;do
-			dpkg-sig --sign builder "$packageName"
-		done
 
 		echo "You must update the repo with git commit and git push in order to see"
 		echo "changes on the repo online"
@@ -139,6 +139,42 @@ function main(){
 		echo "  with a graphical interface."
 		echo "################################################################################"
 		gpg --full-gen-key
+	elif [ "$1" == "-i" ] || [ "$1" == "--install" ] || [ "$1" == "install" ];then
+		repoName="$2"
+		# install git repo to local machine
+		sudo cp -v ./${repoName}.list /etc/apt/sources.list.d/${repoName}.list
+		sudo cp -v ./${repoName}.gpg /etc/apt/trusted.gpg.d/${repoName}.gpg
+	elif [ "$1" == "-u2" ] || [ "$1" == "--uninstall-local-2web" ] || [ "$1" == "uninstall-local-2web" ];then
+		repoName="$2"
+		# install the repo to the local machine, repo is also hosted on local machine
+		sudo rm -v "/etc/apt/sources.list.d/${repoName}_2web.list"
+		sudo rm -v "/etc/apt/trusted.gpg.d/${repoName}.gpg"
+	elif [ "$1" == "-2" ] || [ "$1" == "--install-local-2web" ] || [ "$1" == "install-local-2web" ];then
+		# install to the local 2web instance, for hosting repo and install as a usable repo on local machine
+		set -x
+		repoName="$2"
+		# create the ppa directory
+		sudo mkdir -p /var/cache/2web/web/kodi/ppa/
+
+		# copy the repo files to the local 2web server
+		sudo cp -v ./repo/Release /var/cache/2web/web/kodi/ppa/
+		sudo cp -v ./repo/Release.gpg /var/cache/2web/web/kodi/ppa/
+		sudo cp -v ./repo/InRelease /var/cache/2web/web/kodi/ppa/
+		sudo cp -v ./repo/Packages /var/cache/2web/web/kodi/ppa/
+
+		find "./repo/" -name '*.deb' | uniq | while read packageName;do
+				# copy the package over to the local server
+				sudo cp -v "$packageName" /var/cache/2web/web/kodi/ppa/
+		done
+		# use mdns to host on the local machine
+		{
+			echo "deb [signed-by=/etc/apt/trusted.gpg.d/$repoName.gpg] http://$(hostname).local/kodi/ppa/ ./"
+		} > "./${repoName}_2web.list"
+
+		# install the repo to the local machine, repo is also hosted on local machine
+		sudo cp -v ./${repoName}_2web.list /etc/apt/sources.list.d/${repoName}_2web.list
+		sudo cp -v ./${repoName}.gpg /etc/apt/trusted.gpg.d/${repoName}.gpg
+		set +x
 	elif [ "$1" == "-h" ] || [ "$1" == "--help" ] || [ "$1" == "help" ];then
 		echo "################################################################################"
 		echo "HELP"
@@ -160,6 +196,10 @@ function main(){
 		echo "--scan \$github_username \$github_project_name"
 		echo ""
 		echo "	Read all of the packages and rebuild the repository information."
+		echo ""
+		echo "--install-local-2web"
+		echo ""
+		echo "Can be added to commands to build the repo for a local 2web server"
 		echo ""
 		echo "################################################################################"
 	else

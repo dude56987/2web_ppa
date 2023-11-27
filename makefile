@@ -32,10 +32,14 @@ build:
 keys:
 	# build a key
 	bash deb2web.sh --create-key "dude56987"
+2web:
+	# host on 2web and install local package, for testing repo integrity
+	sudo bash deb2web.sh --install-local-2web "2web_ppa"
+2web-uninstall:
+	sudo bash deb2web.sh --uninstall-local-2web "2web_ppa"
 install:
 	# install the repo on to the current operating system
-	sudo cp -v ./2web_ppa.list /etc/apt/sources.list.d/2web_ppa.list
-	sudo cp -v ./2web_ppa.gpg /etc/apt/trusted.gpg.d/2web_ppa.gpg
+	sudo bash deb2web.sh --install "2web_ppa"
 uninstall:
 	# remove this repo from the system
 	sudo rm -v /etc/apt/sources.list.d/2web_ppa.list
