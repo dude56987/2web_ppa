@@ -73,7 +73,7 @@ function main(){
 		echo "You must update the repo with git commit and git push in order to see"
 		echo "changes on the repo online"
 		# generate the .list file for the repo
-		echo "deb [signed-by=/etc/apt/trusted.gpg.d/$repoName.gpg] https://$githubUsername.github.io/$repoName/repo ./" > ./$repoName.list
+		echo "deb [signed-by=/etc/apt/trusted.gpg.d/$repoName.gpg] https://$githubUsername.github.io/$repoName/repo/ ./" > ./$repoName.list
 		# update the readme
 		{
 			echo "# 2web Debian & Ubuntu Repo"
