@@ -103,6 +103,20 @@ function main(){
 			echo "	sudo wget -q -O '/etc/apt/sources.list.d/$repoName.list' 'https://$githubUsername.github.io/$repoName/$repoName.list'"
 			echo "	sudo apt update"
 			echo ""
+			echo "## Uninstall the Repo"
+			echo ""
+			echo "To manually remove the repo use the below commands"
+			echo ""
+			echo "	sudo rm -v '/etc/apt/trusted.gpg.d/$repoName.gpg'"
+			echo "	sudo rm -v '/etc/apt/sources.list.d/$repoName.list'"
+			echo ""
+			echo "To remove all the packages from this repo use the below command"
+			echo ""
+			# read all the existing packages in the repo
+			cat "./repo/Packages" | tr -d ' ' | grep "Package:" | cut -d':' -f2 | uniq | while read packageTitle;do
+				# create a link to the package name on the github username
+				echo "	sudo apt-get purge '$packageTitle'"
+			done
 			echo ""
 			echo "## Packages"
 			echo ""
@@ -190,9 +204,9 @@ function main(){
 			echo ""
 			echo ""
 			# download and store the public key as a trusted key
-			echo "	sudo curl -SsL --compressed -o '/etc/apt/trusted.gpg.d/$repoName.gpg' 'https://$hostname.local/kodi/ppa/$repoName.gpg'"
+			echo "	sudo curl -SsL --compressed -o '/etc/apt/trusted.gpg.d/$repoName.gpg' 'https://$(hostname).local/kodi/ppa/$repoName.gpg'"
 			# download and store the list file
-			echo "	sudo curl -SsL --compressed -o '/etc/apt/sources.list.d/$repoName.list' 'https://$hostname.local/kodi/ppa/$repoName.list'"
+			echo "	sudo curl -SsL --compressed -o '/etc/apt/sources.list.d/$repoName.list' 'https://$(hostname).local/kodi/ppa/$repoName.list'"
 			echo "	sudo apt update"
 			echo ""
 			echo ""
@@ -200,22 +214,35 @@ function main(){
 			echo ""
 			echo ""
 			# wget variant of above commands
-			echo "	sudo wget -q -O '/etc/apt/trusted.gpg.d/$repoName.gpg' 'https://$hostname.local/kodi/ppa/$repoName.gpg'"
-			echo "	sudo wget -q -O '/etc/apt/sources.list.d/$repoName.list' 'https://$hostname.local/kodi/ppa/$repoName.list'"
+			echo "	sudo wget -q -O '/etc/apt/trusted.gpg.d/$repoName.gpg' 'https://$(hostname).local/kodi/ppa/$repoName.gpg'"
+			echo "	sudo wget -q -O '/etc/apt/sources.list.d/$repoName.list' 'https://$(hostname).local/kodi/ppa/$repoName.list'"
 			echo "	sudo apt update"
 			echo ""
+			echo ""
+			echo "## Uninstall the Repo"
+			echo ""
+			echo "To manually remove the repo use the below commands"
+			echo ""
+			echo "	sudo rm -v '/etc/apt/trusted.gpg.d/$repoName.gpg'"
+			echo "	sudo rm -v '/etc/apt/sources.list.d/$repoName.list'"
+			echo ""
+			echo "To remove all the packages from this repo use the below command"
+			echo ""
+			# read all the existing packages in the repo
+			cat "./repo/Packages" | tr -d ' ' | grep "Package:" | cut -d':' -f2 | uniq | while read packageTitle;do
+				# create a link to the package name on the github username
+				echo "	sudo apt-get purge '$packageTitle'"
+			done
 			echo ""
 			echo "## Packages"
 			echo ""
 			# read all the existing packages in the repo
-			#set -x
 			find "./repo/" -name '*.deb' | uniq | sort | while read packageName;do
 				version=$(dpkg-deb -I "${packageName}" | tr -d ' ' | grep "Version:" | cut -d':' -f2 )
 				packageTitle=$(dpkg-deb -I "${packageName}" | tr -d ' ' | grep "Package:" | cut -d':' -f2 )
 				# create a link to the package name on the github username
 				echo "- [$packageTitle](http://$(hostname).local/repos/$packageTitle/) v$version"
 			done
-			#set +x
 			echo ""
 			echo "## License"
 			echo ""
@@ -234,7 +261,10 @@ function main(){
 			echo "<?PHP"
 			echo "include('/usr/share/2web/templates/header.php');"
 			echo "?>"
+			echo "<div class='titleCard'>"
 			markdown "/var/cache/2web/web/kodi/ppa/README.md"
+			echo "</div>"
+			echo "<script>CreateCopyButtons();</script>";
 			echo "<?PHP"
 			echo "include('/usr/share/2web/templates/footer.php');"
 			echo "?>"
