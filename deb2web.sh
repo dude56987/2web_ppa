@@ -55,19 +55,20 @@ function main(){
 		#gpg --armor --export "$gpgEmail" > ./repo/KEY.gpg
 		# export key without armor for usage
 		gpg --export "$gpgEmail" > ./$repoName.gpg
-
 		find "./repo/" -name '*.deb' | uniq | while read packageName;do
 			# check the integrity of the package
 			if dpkg-sig --verify "$packageName" | grep -q "NOSIG";then
+				echo "The package '$packageName' has not been signed, Signing the package..."
 				# sign the package if no signiture was found on the package
 				# - this will prevent signed packages from being resigned
 				dpkg-sig --sign builder "$packageName"
+			else
+				echo "The package has been signed '$packageName'..."
 			fi
 		done
 
 		# generate the packages file, remove prefix path
 		dpkg-scanpackages --multiversion ./repo/ | sed "s/\.\/repo\///g" > ./repo/Packages
-		# fix packages filter
 
 		# compress the packages file
 		gzip -k --best -f ./repo/Packages
@@ -77,8 +78,6 @@ function main(){
 		# sign the packages in the repo
 		gpg --default-key "$gpgEmail" -abs -o - ./repo/Release > ./repo/Release.gpg
 		gpg --default-key "$gpgEmail" --clearsign -o - ./repo/Release > ./repo/InRelease
-
-		# sign all the packages with gpg
 
 		echo "You must update the repo with git commit and git push in order to see"
 		echo "changes on the repo online"
@@ -177,7 +176,6 @@ function main(){
 		sudo rm -v "/etc/apt/trusted.gpg.d/${repoName}.gpg"
 	elif [ "$1" == "-2" ] || [ "$1" == "--install-local-2web" ] || [ "$1" == "install-local-2web" ];then
 		# install to the local 2web instance, for hosting repo and install as a usable repo on local machine
-		set -x
 		repoName="$2"
 		# create the ppa directory
 		sudo mkdir -p /var/cache/2web/web/kodi/ppa/
@@ -277,7 +275,6 @@ function main(){
 		# install the repo to the local machine, repo is also hosted on local machine
 		sudo cp -v ./${repoName}_2web.list /etc/apt/sources.list.d/${repoName}_2web.list
 		sudo cp -v ./${repoName}.gpg /etc/apt/trusted.gpg.d/${repoName}.gpg
-		set +x
 	elif [ "$1" == "-h" ] || [ "$1" == "--help" ] || [ "$1" == "help" ];then
 		echo "################################################################################"
 		echo "HELP"

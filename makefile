@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ########################################################################
-all: build
+all:
 	# - this will fail if you have not built gpg keys with 'make keys'
 	# - if you do not have the correct signing key this will also fail
 	# scan for new debian files
