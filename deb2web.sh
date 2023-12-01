@@ -37,9 +37,9 @@ function main(){
 		# get the version number
 		version=$(dpkg-deb -I "./source/2web/2web_UNSTABLE.deb" | grep "Version:" | tr -d ' ' | cut -d':' -f2)
 		# copy the build over to this directory for use in the ppa
-		cp "./source/2web/2web_UNSTABLE.deb" "./repo/2web_v$version.deb"
+		cp -v "./source/2web/2web_UNSTABLE.deb" "./repo/2web_v$version.deb"
 		# set permissions of the repo files to world readable so webserver can host files
-		chmod -R ugo+r ./repo/
+		sudo chmod -R ugo+r ./repo/
 	elif [ "$1" == "-s" ] || [ "$1" == "--scan" ] || [ "$1" == "scan" ] ;then
 		################################################################################
 		# Scan the repo for new packages and rebuild all gpg signatures
@@ -55,7 +55,12 @@ function main(){
 		gpg --export "$gpgEmail" > ./$repoName.gpg
 
 		find "./repo/" -name '*.deb' | uniq | while read packageName;do
-			dpkg-sig --sign builder "$packageName"
+			# check the integrity of the package
+			if dpkg-sig --verify "$packageName" | grep -q "NOSIG";then
+				# sign the package if no signiture was found on the package
+				# - this will prevent signed packages from being resigned
+				dpkg-sig --sign builder "$packageName"
+			fi
 		done
 
 		# generate the packages file
@@ -102,10 +107,14 @@ function main(){
 			echo "## Packages"
 			echo ""
 			# read all the existing packages in the repo
-			cat "./repo/Packages" | tr -d ' ' | grep "Package:" | cut -d':' -f2 | uniq | while read packageName;do
+			set -x
+			find "./repo/" -name '*.deb' | uniq | sort | while read packageName;do
+				version=$(dpkg-deb -I "${packageName}" | tr -d ' ' | grep "Version:" | cut -d':' -f2 )
+				packageTitle=$(dpkg-deb -I "${packageName}" | tr -d ' ' | grep "Package:" | cut -d':' -f2 )
 				# create a link to the package name on the github username
-				echo "- [$packageName](https://github.com/$githubUsername/$packageName/)"
+				echo "- [$packageTitle](https://github.com/$githubUsername/$packageTitle/) v$version"
 			done
+			set +x
 			echo ""
 			echo "## License"
 			echo ""
@@ -171,6 +180,67 @@ function main(){
 			echo "deb [signed-by=/etc/apt/trusted.gpg.d/$repoName.gpg] http://$(hostname).local/kodi/ppa/ ./"
 		} > "./${repoName}_2web.list"
 
+		# update the readme
+		{
+			echo "# 2web Debian & Ubuntu Repo"
+			echo ""
+			echo "This is the repo for updating ubuntu and debian versions of 2web with APT"
+			echo ""
+			echo "## Install the Repo"
+			echo ""
+			echo ""
+			# download and store the public key as a trusted key
+			echo "	sudo curl -SsL --compressed -o '/etc/apt/trusted.gpg.d/$repoName.gpg' 'https://$hostname.local/kodi/ppa/$repoName.gpg'"
+			# download and store the list file
+			echo "	sudo curl -SsL --compressed -o '/etc/apt/sources.list.d/$repoName.list' 'https://$hostname.local/kodi/ppa/$repoName.list'"
+			echo "	sudo apt update"
+			echo ""
+			echo ""
+			echo "Or if you use wget instead of curl"
+			echo ""
+			echo ""
+			# wget variant of above commands
+			echo "	sudo wget -q -O '/etc/apt/trusted.gpg.d/$repoName.gpg' 'https://$hostname.local/kodi/ppa/$repoName.gpg'"
+			echo "	sudo wget -q -O '/etc/apt/sources.list.d/$repoName.list' 'https://$hostname.local/kodi/ppa/$repoName.list'"
+			echo "	sudo apt update"
+			echo ""
+			echo ""
+			echo "## Packages"
+			echo ""
+			# read all the existing packages in the repo
+			#set -x
+			find "./repo/" -name '*.deb' | uniq | sort | while read packageName;do
+				version=$(dpkg-deb -I "${packageName}" | tr -d ' ' | grep "Version:" | cut -d':' -f2 )
+				packageTitle=$(dpkg-deb -I "${packageName}" | tr -d ' ' | grep "Package:" | cut -d':' -f2 )
+				# create a link to the package name on the github username
+				echo "- [$packageTitle](http://$(hostname).local/repos/$packageTitle/) v$version"
+			done
+			#set +x
+			echo ""
+			echo "## License"
+			echo ""
+			echo "- [GPLv3](./LICENSE)"
+			echo ""
+		} > "/var/cache/2web/web/kodi/ppa/README.md"
+		# create a readme webpage in the repo directory
+		{
+			echo "<html>"
+			echo "<head>"
+			echo "<script src='/2webLib.js'></script>"
+			echo "<link rel='stylesheet' type='text/css' href='/style.css'>"
+			echo "<link rel='icon' type='image/png' href='/favicon.png'>"
+			echo "</head>"
+			echo "<body>"
+			echo "<?PHP"
+			echo "include('/usr/share/2web/templates/header.php');"
+			echo "?>"
+			markdown "/var/cache/2web/web/kodi/ppa/README.md"
+			echo "<?PHP"
+			echo "include('/usr/share/2web/templates/footer.php');"
+			echo "?>"
+			echo "</body>"
+			echo "</html>"
+		} > "/var/cache/2web/web/kodi/ppa/index.php"
 		# install the repo to the local machine, repo is also hosted on local machine
 		sudo cp -v ./${repoName}_2web.list /etc/apt/sources.list.d/${repoName}_2web.list
 		sudo cp -v ./${repoName}.gpg /etc/apt/trusted.gpg.d/${repoName}.gpg
