@@ -40,6 +40,8 @@ function main(){
 		cp -v "./source/2web/2web_UNSTABLE.deb" "./repo/2web_v$version.deb"
 		# set permissions of the repo files to world readable so webserver can host files
 		sudo chmod -R ugo+r ./repo/
+		# make the current user the owner
+		sudo chown -R $USERNAME:$USERNAME ./repo/
 	elif [ "$1" == "-s" ] || [ "$1" == "--scan" ] || [ "$1" == "scan" ] ;then
 		################################################################################
 		# Scan the repo for new packages and rebuild all gpg signatures
@@ -63,8 +65,10 @@ function main(){
 			fi
 		done
 
-		# generate the packages file
-		dpkg-scanpackages --multiversion ./repo/ > ./repo/Packages
+		# generate the packages file, remove prefix path
+		dpkg-scanpackages --multiversion ./repo/ | sed "s/\.\/repo\///g" > ./repo/Packages
+		# fix packages filter
+
 		# compress the packages file
 		gzip -k --best -f ./repo/Packages
 		# build the release files
@@ -73,6 +77,7 @@ function main(){
 		# sign the packages in the repo
 		gpg --default-key "$gpgEmail" -abs -o - ./repo/Release > ./repo/Release.gpg
 		gpg --default-key "$gpgEmail" --clearsign -o - ./repo/Release > ./repo/InRelease
+
 		# sign all the packages with gpg
 
 		echo "You must update the repo with git commit and git push in order to see"
@@ -121,14 +126,12 @@ function main(){
 			echo "## Packages"
 			echo ""
 			# read all the existing packages in the repo
-			set -x
-			find "./repo/" -name '*.deb' | uniq | sort | while read packageName;do
+			find "./repo/" -name '*.deb' | uniq | sort -r | while read packageName;do
 				version=$(dpkg-deb -I "${packageName}" | tr -d ' ' | grep "Version:" | cut -d':' -f2 )
 				packageTitle=$(dpkg-deb -I "${packageName}" | tr -d ' ' | grep "Package:" | cut -d':' -f2 )
 				# create a link to the package name on the github username
 				echo "- [$packageTitle](https://github.com/$githubUsername/$packageTitle/) v$version"
 			done
-			set +x
 			echo ""
 			echo "## License"
 			echo ""
@@ -237,7 +240,7 @@ function main(){
 			echo "## Packages"
 			echo ""
 			# read all the existing packages in the repo
-			find "./repo/" -name '*.deb' | uniq | sort | while read packageName;do
+			find "./repo/" -name '*.deb' | uniq | sort -r | while read packageName;do
 				version=$(dpkg-deb -I "${packageName}" | tr -d ' ' | grep "Version:" | cut -d':' -f2 )
 				packageTitle=$(dpkg-deb -I "${packageName}" | tr -d ' ' | grep "Package:" | cut -d':' -f2 )
 				# create a link to the package name on the github username
