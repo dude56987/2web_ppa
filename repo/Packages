@@ -14,3 +14,19 @@ Priority: optional
 Description: Generate a website for use on the LAN
  Generate a website for your multimedia collection compatible with tablets,phones, and all desktop computers. Host movies,shows,music,books,iptv,wikis,weather and system graphs on a single machine. NO API KEYS REQUIRED! Think of 2web as a bookshelf in your home for your local network. 2web was originally created for a raspberry pi 2 and works with Dietpi, Raspbian, Debian, and Ubuntu derivatives.
 
+Package: 2web
+Version: 1.0.0.581
+Architecture: all
+Maintainer: Carl J Smith
+Installed-Size: 3164
+Depends: apache2(>=2.4), detox, html-xml-utils, wkhtmltopdf, txt2html, ffmpeg, imagemagick, mediainfo, php, libapache2-mod-php, php-curl, php-zip, php-sqlite3, python3-pip, pylint, fonts-opendyslexic, parallel, at, ncurses-bin, coreutils, jq, curl, cron, findutils, procps, openssl, poppler-utils, weather-util, weather-util-data, fortune, fortunes, symlinks, sqlite3, qrencode, vnstati, pandoc, gource, git, gitinspector, weblint, shellcheck, librsvg2-bin, xvfb, dict, dictd, php-pspell, aspell-en, wget, bc
+Filename: ./repo/2web_v1.0.0.581.deb
+Size: 425428
+MD5sum: 7593341c0aab2258f8a64fed0b73e978
+SHA1: a4af0919eb32c99f8cee416418c773025de30d06
+SHA256: c6973797ab00599f562234b96df2489d9e22c46c6f0d1d322d4dea63d13a8113
+Section: admin
+Priority: optional
+Description: Generate a website for use on the LAN
+ Generate a website for your multimedia collection compatible with tablets,phones, and all desktop computers. Host movies,shows,music,books,iptv,wikis,weather and system graphs on a single machine. NO API KEYS REQUIRED! Think of 2web as a bookshelf in your home for your local network. 2web was originally created for a raspberry pi 2 and works with Dietpi, Raspbian, Debian, and Ubuntu derivatives.
+
