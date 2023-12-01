@@ -4,7 +4,7 @@ Architecture: all
 Maintainer: Carl J Smith
 Installed-Size: 3164
 Depends: apache2(>=2.4), detox, html-xml-utils, wkhtmltopdf, txt2html, ffmpeg, imagemagick, mediainfo, php, libapache2-mod-php, php-curl, php-zip, php-sqlite3, python3-pip, pylint, fonts-opendyslexic, parallel, at, ncurses-bin, coreutils, jq, curl, cron, findutils, procps, openssl, poppler-utils, weather-util, weather-util-data, fortune, fortunes, symlinks, sqlite3, qrencode, vnstati, pandoc, gource, git, gitinspector, weblint, shellcheck, librsvg2-bin, xvfb, dict, dictd, php-pspell, aspell-en, wget, bc
-Filename: ./repo/2web_v1.0.0.575.deb
+Filename: 2web_v1.0.0.575.deb
 Size: 425538
 MD5sum: 364baaf28fc3fbc469ed6ab996789cf3
 SHA1: 15850a5eeb3e0762b1e9ff1618fee9c4c276814d
@@ -20,11 +20,11 @@ Architecture: all
 Maintainer: Carl J Smith
 Installed-Size: 3164
 Depends: apache2(>=2.4), detox, html-xml-utils, wkhtmltopdf, txt2html, ffmpeg, imagemagick, mediainfo, php, libapache2-mod-php, php-curl, php-zip, php-sqlite3, python3-pip, pylint, fonts-opendyslexic, parallel, at, ncurses-bin, coreutils, jq, curl, cron, findutils, procps, openssl, poppler-utils, weather-util, weather-util-data, fortune, fortunes, symlinks, sqlite3, qrencode, vnstati, pandoc, gource, git, gitinspector, weblint, shellcheck, librsvg2-bin, xvfb, dict, dictd, php-pspell, aspell-en, wget, bc
-Filename: ./repo/2web_v1.0.0.581.deb
-Size: 425428
-MD5sum: 7593341c0aab2258f8a64fed0b73e978
-SHA1: a4af0919eb32c99f8cee416418c773025de30d06
-SHA256: c6973797ab00599f562234b96df2489d9e22c46c6f0d1d322d4dea63d13a8113
+Filename: 2web_v1.0.0.581.deb
+Size: 426722
+MD5sum: 8de36f6d2902146d216bcccc64cbdefb
+SHA1: b858dda767d85b9d5b6d1ba5a12cea24a46f64dd
+SHA256: b3b5ce33c189146fb3d09a376e393002bffb211874fde918163444e756618675
 Section: admin
 Priority: optional
 Description: Generate a website for use on the LAN
