@@ -25,13 +25,13 @@ function main(){
 		# clone repo if it is not there
 		# or
 		# pull any changes
-		git clone "https://github.com/dude56987/2web.git" "./source/2web/" || git -C "./source/2web/" pull
+		sudo git clone "https://github.com/dude56987/2web.git" "./source/2web/" || sudo git -C "./source/2web/" pull
 	elif [ "$1" == "-b" ] || [ "$1" == "--build" ] || [ "$1" == "build" ] ;then
 		################################################################################
 		# Add build instructions for each package in the repo here.
 		################################################################################
 		# build the source code into a package for use in the repository.
-		mkdir -p "./repo/"
+		sudo mkdir -p "./repo/"
 		# make the build
 		sudo make -C "./source/2web" build
 		# get the version number
