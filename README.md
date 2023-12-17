@@ -30,6 +30,7 @@ To remove all the packages from this repo use the below command
 
 ## Packages
 
+- [2web](https://github.com/dude56987/2web/) v1.0.0.595
 - [2web](https://github.com/dude56987/2web/) v1.0.0.594
 - [2web](https://github.com/dude56987/2web/) v1.0.0.581
 - [2web](https://github.com/dude56987/2web/) v1.0.0.575
