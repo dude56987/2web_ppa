@@ -1,36 +1,4 @@
 Package: 2web
-Version: 1.0.0.581
-Architecture: all
-Maintainer: Carl J Smith
-Installed-Size: 3164
-Depends: apache2(>=2.4), detox, html-xml-utils, wkhtmltopdf, txt2html, ffmpeg, imagemagick, mediainfo, php, libapache2-mod-php, php-curl, php-zip, php-sqlite3, python3-pip, pylint, fonts-opendyslexic, parallel, at, ncurses-bin, coreutils, jq, curl, cron, findutils, procps, openssl, poppler-utils, weather-util, weather-util-data, fortune, fortunes, symlinks, sqlite3, qrencode, vnstati, pandoc, gource, git, gitinspector, weblint, shellcheck, librsvg2-bin, xvfb, dict, dictd, php-pspell, aspell-en, wget, bc
-Filename: 2web_v1.0.0.581.deb
-Size: 426722
-MD5sum: 8de36f6d2902146d216bcccc64cbdefb
-SHA1: b858dda767d85b9d5b6d1ba5a12cea24a46f64dd
-SHA256: b3b5ce33c189146fb3d09a376e393002bffb211874fde918163444e756618675
-Section: admin
-Priority: optional
-Description: Generate a website for use on the LAN
- Generate a website for your multimedia collection compatible with tablets,phones, and all desktop computers. Host movies,shows,music,books,iptv,wikis,weather and system graphs on a single machine. NO API KEYS REQUIRED! Think of 2web as a bookshelf in your home for your local network. 2web was originally created for a raspberry pi 2 and works with Dietpi, Raspbian, Debian, and Ubuntu derivatives.
-
-Package: 2web
-Version: 1.0.0.594
-Architecture: all
-Maintainer: Carl J Smith
-Installed-Size: 3164
-Depends: apache2(>=2.4), detox, html-xml-utils, wkhtmltopdf, txt2html, ffmpeg, imagemagick, mediainfo, php, libapache2-mod-php, php-curl, php-zip, php-sqlite3, python3-pip, pylint, fonts-opendyslexic, parallel, at, ncurses-bin, coreutils, jq, curl, cron, findutils, procps, openssl, poppler-utils, weather-util, weather-util-data, fortune, fortunes, symlinks, sqlite3, qrencode, vnstati, pandoc, gource, git, gitinspector, weblint, shellcheck, librsvg2-bin, xvfb, dict, dictd, php-pspell, aspell-en, wget, bc
-Filename: 2web_v1.0.0.594.deb
-Size: 426866
-MD5sum: 60a4fa8503fe3975b802407a913639b2
-SHA1: 3e5b1302d1d11afb0e89a7ed7d9f95a22eb02abe
-SHA256: 8c4d6e6d3a95546ef35f5a0cea486aa179119647497f7a4746506f50d9e6eb4b
-Section: admin
-Priority: optional
-Description: Generate a website for use on the LAN
- Generate a website for your multimedia collection compatible with tablets,phones, and all desktop computers. Host movies,shows,music,books,iptv,wikis,weather and system graphs on a single machine. NO API KEYS REQUIRED! Think of 2web as a bookshelf in your home for your local network. 2web was originally created for a raspberry pi 2 and works with Dietpi, Raspbian, Debian, and Ubuntu derivatives.
-
-Package: 2web
 Version: 1.0.0.595
 Architecture: all
 Maintainer: Carl J Smith
@@ -57,6 +25,22 @@ Size: 431150
 MD5sum: 49690be7cfb07c074f8f59ebeee974a8
 SHA1: f9d9f7e65e2494833d006d63e290e0935d3999b6
 SHA256: a2299bd4ca39453019a40ba9fc35ccc418d348ca1f19afd10efdf06991bbef40
+Section: admin
+Priority: optional
+Description: Generate a website for use on the LAN
+ Generate a website for your multimedia collection compatible with tablets,phones, and all desktop computers. Host movies,shows,music,books,iptv,wikis,weather and system graphs on a single machine. NO API KEYS REQUIRED! Think of 2web as a bookshelf in your home for your local network. 2web was originally created for a raspberry pi 2 and works with Dietpi, Raspbian, Debian, and Ubuntu derivatives.
+
+Package: 2web
+Version: 1.0.0.612
+Architecture: all
+Maintainer: Carl J Smith
+Installed-Size: 4180
+Depends: apache2(>=2.4), detox, html-xml-utils, wkhtmltopdf, txt2html, ffmpeg, imagemagick, mediainfo, php, libapache2-mod-php, php-curl, php-zip, php-sqlite3, python3-pip, pylint, fonts-opendyslexic, parallel, at, ncurses-bin, coreutils, jq, curl, cron, findutils, procps, openssl, poppler-utils, weather-util, weather-util-data, fortune, fortunes, symlinks, sqlite3, qrencode, vnstati, pandoc, gource, git, gitinspector, weblint, shellcheck, librsvg2-bin, xvfb, dict, dictd, php-pspell, aspell-en, wget, bc
+Filename: 2web_v1.0.0.612.deb
+Size: 431758
+MD5sum: 26ce8d1fa3a0cdc531b165010d3e87cf
+SHA1: 02c282dce1a9c4b6170ed4d3e127f05d4db9e313
+SHA256: db32fb52514e5c3dcd07e5652c42ce3f6e6770e7f82044033237e3b448107ab0
 Section: admin
 Priority: optional
 Description: Generate a website for use on the LAN
