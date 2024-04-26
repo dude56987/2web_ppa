@@ -1,20 +1,4 @@
 Package: 2web
-Version: 1.0.0.612
-Architecture: all
-Maintainer: Carl J Smith
-Installed-Size: 4180
-Depends: apache2(>=2.4), detox, html-xml-utils, wkhtmltopdf, txt2html, ffmpeg, imagemagick, mediainfo, php, libapache2-mod-php, php-curl, php-zip, php-sqlite3, python3-pip, pylint, fonts-opendyslexic, parallel, at, ncurses-bin, coreutils, jq, curl, cron, findutils, procps, openssl, poppler-utils, weather-util, weather-util-data, fortune, fortunes, symlinks, sqlite3, qrencode, vnstati, pandoc, gource, git, gitinspector, weblint, shellcheck, librsvg2-bin, xvfb, dict, dictd, php-pspell, aspell-en, wget, bc
-Filename: 2web_v1.0.0.612.deb
-Size: 431758
-MD5sum: 26ce8d1fa3a0cdc531b165010d3e87cf
-SHA1: 02c282dce1a9c4b6170ed4d3e127f05d4db9e313
-SHA256: db32fb52514e5c3dcd07e5652c42ce3f6e6770e7f82044033237e3b448107ab0
-Section: admin
-Priority: optional
-Description: Generate a website for use on the LAN
- Generate a website for your multimedia collection compatible with tablets,phones, and all desktop computers. Host movies,shows,music,books,iptv,wikis,weather and system graphs on a single machine. NO API KEYS REQUIRED! Think of 2web as a bookshelf in your home for your local network. 2web was originally created for a raspberry pi 2 and works with Dietpi, Raspbian, Debian, and Ubuntu derivatives.
-
-Package: 2web
 Version: 1.0.0.636
 Architecture: all
 Maintainer: Carl J Smith
@@ -41,6 +25,22 @@ Size: 477046
 MD5sum: 83849e15455e4250138232aa220ab65a
 SHA1: 0252aa24a1c693b902fe2d37a1dcd1ea19af22d7
 SHA256: 4f3fb5133f75f6a4f28dc9b126ec84280c49f01079c54b0a952d24fc943d5d93
+Section: admin
+Priority: optional
+Description: Generate a website for use on the LAN
+ Generate a website for your multimedia collection compatible with tablets,phones, and all desktop computers. Host movies,shows,music,books,iptv,wikis,weather and system graphs on a single machine. NO API KEYS REQUIRED! Think of 2web as a bookshelf in your home for your local network. 2web was originally created for a raspberry pi 2 and works with Dietpi, Raspbian, Debian, and Ubuntu derivatives.
+
+Package: 2web
+Version: 1.0.0.685
+Architecture: all
+Maintainer: Carl J Smith
+Installed-Size: 4644
+Depends: apache2(>=2.4), detox, html-xml-utils, wkhtmltopdf, txt2html, ffmpeg, imagemagick, mediainfo, php, libapache2-mod-php, php-curl, php-zip, php-sqlite3, python3-pip, pylint, fonts-opendyslexic, parallel, at, ncurses-bin, coreutils, jq, curl, cron, findutils, procps, openssl, poppler-utils, weather-util, weather-util-data, fortune, fortunes, symlinks, sqlite3, qrencode, vnstati, pandoc, gource, git, gitinspector, weblint, shellcheck, librsvg2-bin, xvfb, dict, dictd, php-pspell, aspell-en, wget, bc
+Filename: 2web_v1.0.0.685.deb
+Size: 477162
+MD5sum: 39205a64f78f0b5d28a1eac0fa95b04e
+SHA1: 2de9811b33439eb8e22195a70b17aaed286fdc38
+SHA256: 590761c1c8a07b75276c9c8a7a62410984be25cf9d772d3413ab5c06b87c3304
 Section: admin
 Priority: optional
 Description: Generate a website for use on the LAN
